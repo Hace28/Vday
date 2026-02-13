@@ -2,7 +2,7 @@ const CONFIG = {
     password: "18042024", 
     typingSpeed: 95,     
     heartSpawnRate: 350,  
-    message: "Happy Valentine’s my sweet, beautiful Aisha.\n\nYou always make every day feel so special, even the bad ones. I am so lucky to have you.\n\nI love you so much my pweety Pwincess!🥹❤️"
+    message: "Happy Valentine’s my sweet, beautiful Aisha.\n\nYou always make every day feel special, even the bad ones, and I am so grateful to have you.\n\nI love you so much my pweety Pwincess!🥹❤️"
 };
 
 const elements = {
@@ -18,7 +18,7 @@ const elements = {
     bgVideo: document.getElementById("bgVideo")
 };
 
-// 1. HEART ANIMATION
+// 1. HEART ANIMATION (Always runs in background)
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -34,35 +34,41 @@ function createHeart() {
 }
 setInterval(createHeart, CONFIG.heartSpawnRate);
 
-// 2. UNLOCK LOGIC
+// 2. PASSWORD CHECKING
 function checkPassword() {
     const userInput = elements.passwordInput.value.replace(/[^0-9]/g, "");
+    
+    // Only triggers if password is correct
     if (userInput === CONFIG.password) {
         unlockSurprise();
     } else {
         elements.errorMsg.textContent = "Wrong date! Try again 💔";
         elements.passwordInput.classList.add("shake-animation");
         setTimeout(() => elements.passwordInput.classList.remove("shake-animation"), 500);
+        elements.passwordInput.value = ""; // Clear the wrong input
     }
 }
 
+// 3. THE SURPRISE TRIGGER
 function unlockSurprise() {
-    // Play Music
+    // START MUSIC (Only on success)
     if (elements.bgMusic) {
-        elements.bgMusic.play().catch(() => console.log("Music blocked"));
+        elements.bgMusic.play().catch(e => console.log("Audio play blocked: ", e));
     }
 
-    // SLOW DOWN AND PLAY VIDEO
+    // START VIDEO (Only on success)
     if (elements.bgVideo) {
-        elements.bgVideo.playbackRate = 0.5; // Slows video down to half speed
+        elements.bgVideo.playbackRate = 0.5; // Slower playback
         elements.bgVideo.play();
-        elements.bgVideo.style.opacity = "0.3"; 
+        elements.bgVideo.style.opacity = "0.3"; // Fade in at low opacity
     }
 
+    // Lock PNG pop animation
     elements.heartLock.classList.add("heart-unlock-anim");
     elements.passwordInput.style.opacity = "0";
     elements.unlockBtn.style.opacity = "0";
 
+    // Transition to the note
     setTimeout(() => {
         elements.loginContainer.style.transition = "opacity 0.8s ease";
         elements.loginContainer.style.opacity = "0";
@@ -95,7 +101,8 @@ function typeMessage(text) {
     }, CONFIG.typingSpeed);
 }
 
-elements.passwordInput.addEventListener("keypress", (e) => { if (e.key === "Enter") checkPassword(); });
-
+// Listeners for click and Enter key
 elements.unlockBtn.addEventListener("click", checkPassword);
-
+elements.passwordInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") checkPassword();
+});
