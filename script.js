@@ -18,7 +18,7 @@ const elements = {
     bgVideo: document.getElementById("bgVideo")
 };
 
-// 1. HEART ANIMATION (Always runs in background)
+// 1. FIXED HEART ANIMATION
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -29,46 +29,41 @@ function createHeart() {
     heart.style.width = size + "px";
     heart.style.height = size + "px";
     heart.style.animationDuration = duration + "s";
+    
     if (elements.background) elements.background.appendChild(heart);
+    
     setTimeout(() => { heart.remove(); }, duration * 1000);
 }
 setInterval(createHeart, CONFIG.heartSpawnRate);
 
-// 2. PASSWORD CHECKING
+// 2. UNLOCK LOGIC
 function checkPassword() {
     const userInput = elements.passwordInput.value.replace(/[^0-9]/g, "");
-    
-    // Only triggers if password is correct
     if (userInput === CONFIG.password) {
         unlockSurprise();
     } else {
         elements.errorMsg.textContent = "Wrong date! Try again 💔";
         elements.passwordInput.classList.add("shake-animation");
         setTimeout(() => elements.passwordInput.classList.remove("shake-animation"), 500);
-        elements.passwordInput.value = ""; // Clear the wrong input
     }
 }
 
-// 3. THE SURPRISE TRIGGER
 function unlockSurprise() {
-    // START MUSIC (Only on success)
+    // Media plays ONLY on success
     if (elements.bgMusic) {
-        elements.bgMusic.play().catch(e => console.log("Audio play blocked: ", e));
+        elements.bgMusic.play().catch(() => console.log("Music blocked"));
     }
 
-    // START VIDEO (Only on success)
     if (elements.bgVideo) {
-        elements.bgVideo.playbackRate = 0.5; // Slower playback
+        elements.bgVideo.playbackRate = 0.5; 
         elements.bgVideo.play();
-        elements.bgVideo.style.opacity = "0.3"; // Fade in at low opacity
+        elements.bgVideo.style.opacity = "0.3"; 
     }
 
-    // Lock PNG pop animation
     elements.heartLock.classList.add("heart-unlock-anim");
     elements.passwordInput.style.opacity = "0";
     elements.unlockBtn.style.opacity = "0";
 
-    // Transition to the note
     setTimeout(() => {
         elements.loginContainer.style.transition = "opacity 0.8s ease";
         elements.loginContainer.style.opacity = "0";
@@ -101,8 +96,5 @@ function typeMessage(text) {
     }, CONFIG.typingSpeed);
 }
 
-// Listeners for click and Enter key
+elements.passwordInput.addEventListener("keypress", (e) => { if (e.key === "Enter") checkPassword(); });
 elements.unlockBtn.addEventListener("click", checkPassword);
-elements.passwordInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") checkPassword();
-});
