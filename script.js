@@ -2,7 +2,7 @@ const CONFIG = {
     password: "18042024", 
     typingSpeed: 95,     
     heartSpawnRate: 350,  
-    message: "Happy Valentine’s my sweet, beautiful Aisha.\n\nYou always make every day feel so special, even the bad onse and I’m so lucky to have you.\n\nI love you so much my pweety Pwincess!🥹❤️"
+    message: "Happy Valentine’s my sweet, beautiful Aisha.\n\nYou always make every day feel so special, even the bad ones. I am so lucky to have you.\n\nI love you so much my pweety Pwincess!🥹❤️"
 };
 
 const elements = {
@@ -98,3 +98,4 @@ function typeMessage(text) {
 elements.passwordInput.addEventListener("keypress", (e) => { if (e.key === "Enter") checkPassword(); });
 
 elements.unlockBtn.addEventListener("click", checkPassword);
+
