@@ -14,12 +14,13 @@
 </head>
 <body>
 
-    <!-- Background container for floating hearts -->
+    <!-- Layer 1: Background hearts -->
     <div class="background" id="bg"></div>
 
-    <!-- The 9:16 Video Background -->
+    <!-- Layer 2: 9:16 Video Background -->
     <video id="bgVideo" src="assets/V.mp4" loop muted playsinline class="bg-video"></video>
 
+    <!-- Layer 3: Login Card -->
     <div class="login-container" id="login">
         <div class="heart-lock-wrapper">
             <img src="assets/heart-lock.png" alt="Heart Lock" id="heartLock" class="heart-lock">
@@ -34,12 +35,18 @@
         <p id="error" class="error"></p>
     </div>
 
+    <!-- Layer 3: Surprise Note (Top-aligned structure) -->
     <div class="note-container" id="note">
-        <img src="assets/Flowers.png" alt="Flowers" class="flowers"/>
-        <h1>Happy Valentine&rsquo;s Day!</h1>
-        <p id="noteText"></p>
+        <div class="note-header">
+            <img src="assets/Flowers.png" alt="Flowers" class="flowers"/>
+            <h1>Happy Valentine&rsquo;s Day!</h1>
+        </div>
+        <div class="note-content">
+            <p id="noteText"></p>
+        </div>
     </div>
 
+    <!-- Background Music -->
     <audio id="bgMusic" src="assets/Can i have this dance.mp3" loop></audio>
 
     <script src="script.js"></script>
