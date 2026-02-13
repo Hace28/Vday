@@ -1,4 +1,4 @@
-* {
+* {* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -22,12 +22,11 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    /* Forces 9:16 Ratio */
     height: 100dvh;
     aspect-ratio: 9 / 16;
     width: auto;
     object-fit: cover;
-    z-index: 2; /* Below text, above hearts */
+    z-index: 2; 
     opacity: 0;
     transition: opacity 2.5s ease;
     pointer-events: none;
@@ -40,7 +39,6 @@ body {
     z-index: 1;
 }
 
-/* Floating Heart Shape */
 .heart {
     position: absolute;
     bottom: -100px;
@@ -64,7 +62,6 @@ body {
     100% { transform: translateY(-115vh) rotate(-45deg) scale(1.2); opacity: 0; }
 }
 
-/* Login Card */
 .login-container {
     position: relative;
     z-index: 10;
@@ -75,8 +72,8 @@ body {
     text-align: center;
     width: 90%;
     max-width: 360px;
-    backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.5);
 }
 
@@ -94,7 +91,6 @@ input#password {
     font-family: 'Satisfy', cursive;
     color: #c9184a;
     outline: none;
-    background: white;
 }
 
 button#unlockBtn {
@@ -110,7 +106,6 @@ button#unlockBtn {
     cursor: pointer;
 }
 
-/* Note Section */
 .note-container {
     display: none;
     position: relative;
@@ -149,4 +144,5 @@ button#unlockBtn {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-8px); }
     75% { transform: translateX(8px); }
+}
 }
