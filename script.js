@@ -1,6 +1,6 @@
 const CONFIG = {
     password: "18042024", 
-    typingSpeed: 110,     
+    typingSpeed: 95,     
     heartSpawnRate: 350,  
     message: "Happy Valentine’s my sweet, beautiful Aisha.\n\nYou always make every day feel special, even the bad ones, and I am so grateful to have you.\n\nI love you so much my pweety Pwincess!🥹❤️"
 };
@@ -18,7 +18,10 @@ const elements = {
     bgVideo: document.getElementById("bgVideo")
 };
 
-// 1. FIXED HEART ANIMATION
+// Ensure note starts hidden correctly
+elements.noteContainer.style.display = "none";
+
+// 1. FLOATING HEART ANIMATION
 function createHeart() {
     const heart = document.createElement("div");
     heart.classList.add("heart");
@@ -55,7 +58,7 @@ function unlockSurprise() {
     }
 
     if (elements.bgVideo) {
-        elements.bgVideo.playbackRate = 0.5; 
+        elements.bgVideo.playbackRate = 0.5; // Slow-mo speed
         elements.bgVideo.play();
         elements.bgVideo.style.opacity = "0.3"; 
     }
@@ -70,7 +73,8 @@ function unlockSurprise() {
 
         setTimeout(() => {
             elements.loginContainer.style.display = "none";
-            elements.noteContainer.style.display = "block";
+            // Set to flex to keep header at top and text flowing down
+            elements.noteContainer.style.display = "flex";
             elements.noteContainer.style.opacity = "0";
             
             setTimeout(() => {
@@ -98,4 +102,3 @@ function typeMessage(text) {
 
 elements.passwordInput.addEventListener("keypress", (e) => { if (e.key === "Enter") checkPassword(); });
 elements.unlockBtn.addEventListener("click", checkPassword);
-
