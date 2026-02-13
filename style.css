@@ -1,0 +1,152 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #ffccd5;
+    font-family: 'Satisfy', cursive;
+    height: 100vh;
+    height: 100dvh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* FIXED 9:16 VIDEO BACKGROUND */
+.bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    /* Forces 9:16 Ratio */
+    height: 100dvh;
+    aspect-ratio: 9 / 16;
+    width: auto;
+    object-fit: cover;
+    z-index: 2; /* Below text, above hearts */
+    opacity: 0;
+    transition: opacity 2.5s ease;
+    pointer-events: none;
+}
+
+.background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+}
+
+/* Floating Heart Shape */
+.heart {
+    position: absolute;
+    bottom: -100px;
+    background-color: #c9184a;
+    transform: rotate(-45deg);
+    animation: floatUp linear forwards;
+}
+.heart::before, .heart::after {
+    content: "";
+    position: absolute;
+    width: 100%; height: 100%;
+    background-color: inherit;
+    border-radius: 50%;
+}
+.heart::before { top: -50%; left: 0; }
+.heart::after { top: 0; left: 50%; }
+
+@keyframes floatUp {
+    0% { transform: translateY(0) rotate(-45deg) scale(0.5); opacity: 0; }
+    10% { opacity: 0.8; }
+    100% { transform: translateY(-115vh) rotate(-45deg) scale(1.2); opacity: 0; }
+}
+
+/* Login Card */
+.login-container {
+    position: relative;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: 0 10px 30px rgba(201, 24, 74, 0.2);
+    text-align: center;
+    width: 90%;
+    max-width: 360px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+h1 { font-family: 'Dancing Script', cursive; color: #c9184a; font-size: 2.2rem; margin-bottom: 8px; }
+p { color: #c9184a; font-size: 1rem; }
+
+input#password {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: 2px solid #ffb6c1;
+    text-align: center;
+    font-size: 1.2rem;
+    font-family: 'Satisfy', cursive;
+    color: #c9184a;
+    outline: none;
+    background: white;
+}
+
+button#unlockBtn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: none;
+    background: #c9184a;
+    color: white;
+    font-family: 'Satisfy', cursive;
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+/* Note Section */
+.note-container {
+    display: none;
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    width: 95%;
+}
+
+#noteText { 
+    font-size: 1.6rem; 
+    color: #fff0f3; 
+    line-height: 1.5; 
+    white-space: pre-wrap;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 182, 193, 0.5);
+}
+
+.flowers { 
+    width: 130px; 
+    margin-bottom: 15px; 
+    filter: drop-shadow(0 0 15px #ffffff) brightness(1.1);
+}
+
+.heart-lock { width: 110px; animation: pulse 2.5s infinite ease-in-out; }
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+}
+
+.heart-unlock-anim { animation: unlockPop 0.8s forwards; }
+@keyframes unlockPop { 100% { transform: scale(0); opacity: 0; } }
+
+.shake-animation { animation: shake 0.4s; }
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
