@@ -1,4 +1,4 @@
-* {* {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -6,7 +6,7 @@
 }
 
 body {
-    background-color: #ffccd5;
+    background-color: #ffccd5; /* Lightish Pink Theme */
     font-family: 'Satisfy', cursive;
     height: 100vh;
     height: 100dvh; 
@@ -16,33 +16,20 @@ body {
     overflow: hidden;
 }
 
-/* FIXED 9:16 VIDEO BACKGROUND */
-.bg-video {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    height: 100dvh;
-    aspect-ratio: 9 / 16;
-    width: auto;
-    object-fit: cover;
-    z-index: 2; 
-    opacity: 0;
-    transition: opacity 2.5s ease;
-    pointer-events: none;
-}
-
+/* BACKGROUND FOR HEARTS */
 .background {
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    z-index: 1;
+    z-index: 1; /* Lowest Layer */
+    pointer-events: none;
 }
 
+/* THE DARK REDDISH PINK HEARTS */
 .heart {
     position: absolute;
     bottom: -100px;
-    background-color: #c9184a;
+    background-color: #c9184a; /* Dark Reddish Pink */
     transform: rotate(-45deg);
     animation: floatUp linear forwards;
 }
@@ -62,9 +49,25 @@ body {
     100% { transform: translateY(-115vh) rotate(-45deg) scale(1.2); opacity: 0; }
 }
 
+/* VIDEO BACKGROUND */
+.bg-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 100dvh;
+    aspect-ratio: 9 / 16;
+    width: auto;
+    object-fit: cover;
+    z-index: 2; /* Above hearts, below UI */
+    opacity: 0;
+    transition: opacity 2.5s ease;
+    pointer-events: none;
+}
+
 .login-container {
     position: relative;
-    z-index: 10;
+    z-index: 10; /* Top Layer */
     background: rgba(255, 255, 255, 0.85);
     padding: 30px;
     border-radius: 30px;
@@ -117,7 +120,7 @@ button#unlockBtn {
 
 #noteText { 
     font-size: 1.6rem; 
-    color: #fff0f3; 
+    color: #fff0f3; /* Whitish Pink Glow */
     line-height: 1.5; 
     white-space: pre-wrap;
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 182, 193, 0.5);
@@ -144,5 +147,4 @@ button#unlockBtn {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-8px); }
     75% { transform: translateX(8px); }
-}
 }
